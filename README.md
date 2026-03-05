@@ -4,6 +4,14 @@ Projeto de Assistente corporativo de Q&A que utiliza RAG avançado com busca hí
 
 ---
 
+<img width="1920" height="906" alt="111111" src="https://github.com/user-attachments/assets/2fabed7f-6cb7-44ca-a5ab-4a38aed2aa65" />
+<img width="1920" height="900" alt="222222" src="https://github.com/user-attachments/assets/7a7895d8-74e5-4127-ac9e-de0627a0bde5" />
+<img width="1920" height="888" alt="33333333" src="https://github.com/user-attachments/assets/98bd54e3-abed-4576-b4a1-abc1c49ae89c" />
+<img width="1920" height="897" alt="4444444444" src="https://github.com/user-attachments/assets/4d17c06d-9bcd-438c-b678-0e7a198f343f" />
+<img width="1920" height="876" alt="55555555555" src="https://github.com/user-attachments/assets/e6fdfc69-5545-4c17-9cb7-71e7ee34b0b9" />
+
+---
+
 ## Visão Geral
 
 O **CorpAssist** é uma projeto criado para permitir que colaboradores consultem informações em documentos internos (PDF, DOCX, TXT) de forma natural e segura. Utilizando técnicas avançadas de **RAG (Retrieval-Augmented Generation)**, o sistema garante que as respostas sejam baseadas exclusivamente no conteúdo indexado, reduzindo alucinações de modelos de IA e fornecendo citações verificáveis e trecho do texto.
