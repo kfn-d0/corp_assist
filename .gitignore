@@ -1,0 +1,32 @@
+# Environment
+.env
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environment
+venv/
+.venv/
+
+# Qdrant and Neo4j data
+vectorstore/
+
+# Uploaded documents
+documents/*
+!documents/.gitkeep
+
+# Logs
+logs/*
+!logs/.gitkeep
+
+# Evaluation results
+evaluation/results/*
+!evaluation/results/.gitkeep
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

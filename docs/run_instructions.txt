@@ -1,0 +1,52 @@
+Step-by-Step Instructions: Running RAG AI on Linux (CentOS)
+===========================================================
+
+This guide explains how to start, stop, and monitor the RAG Artificial Intelligence system on the CentOS Virtual Machine.
+
+Prerequisites
+-------------
+- The CentOS VM must be running.
+- You must have SSH access to the VM.
+  - SSH command used from Windows: `ssh -p 2222 centos@127.0.0.1` 
+
+1. Start Docker Containers (Database Layer)
+-------------------------------------------
+The system relies on Docker to run Qdrant (Vector Database) and Neo4j (Graph Database).
+1. Connect via SSH: `ssh -p 2222 centos@127.0.0.1`
+2. Navigate to the docker directory: `cd ~/project/docker`
+3. Start the containers in the background: `sudo docker compose up -d`
+4. Confirm they are running: `sudo docker ps`
+   - You should see `qdrant/qdrant` and `neo4j`.
+
+2. Start the AI Server (Backend + Frontend)
+-------------------------------------------
+The Python applications (FastAPI backend and Streamlit frontend) must be launched cleanly to avoid conflict with old processes or cached bytecode.
+
+1. Connect via SSH: `ssh -p 2222 centos@127.0.0.1`
+2. Run the automated launch script: 
+   `~/launch.sh > ~/launch.log 2>&1`
+   
+   *Note: This script automatically kills old processes, clears the Python bytecode caches, sets up the PATH, and launches both applications in the background using `nohup`.*
+
+3. Monitor the Logs
+-------------------
+If the Streamlit Interface doesn't load or shows an error, check the live logs on the VM:
+- To view backend (FastAPI/AI) logs: `cat ~/backend.log` 
+- To view frontend (Streamlit) logs: `cat ~/frontend.log`
+- To follow the backend log live: `tail -f ~/backend.log`
+
+4. Access the Application
+-------------------------
+The systems are securely bound inside the VM. Through VirtualBox port forwarding, you can access the frontend from your Windows host computer:
+- Frontend Address: http://localhost:8080 or http://127.0.0.1:8080
+
+*(Note: The backend runs securely on port 8000 inside the VM, invisible to the host, but the Streamlit interface can communicate with it locally on the VM).*
+
+5. Stopping the Server
+----------------------
+To completely turn off the Python applications:
+1. Connect via SSH: `ssh -p 2222 centos@127.0.0.1`
+2. Kill Uvicorn (Backend): `pkill -9 -f uvicorn`
+3. Kill Streamlit: `pkill -9 -f streamlit`
+
+*(You can also use `sudo docker compose down` inside `~/project/docker` to stop the databases if needed).*
