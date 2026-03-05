@@ -230,10 +230,12 @@ async def health_check():
     try:
         from backend.ingest_pipeline import get_qdrant_client
         client = get_qdrant_client()
+        # A chamada get_qdrant_client já tenta criar a coleção se não existir
         collection = client.get_collection(settings.qdrant_collection_name)
         qdrant_ok = True
         doc_count = collection.points_count
-    except:
+    except Exception as e:
+        logger.warning(f"Qdrant health check error: {e}")
         pass
 
     return HealthResponse(

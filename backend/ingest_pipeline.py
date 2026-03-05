@@ -39,18 +39,22 @@ def get_qdrant_client() -> QdrantClient:
 
 def _ensure_collection_exists(client: QdrantClient):
     """Garante que a coleção exista no Qdrant com a configuração correta."""
-    collections = client.get_collections().collections
-    exists = any(c.name == settings.qdrant_collection_name for c in collections)
-    
-    if not exists:
-
-        client.create_collection(
-            collection_name=settings.qdrant_collection_name,
-            vectors_config=models.VectorParams(
-                size=768, 
-                distance=models.Distance.COSINE
-            ),
-        )
+    try:
+        collections = client.get_collections().collections
+        exists = any(c.name == settings.qdrant_collection_name for c in collections)
+        
+        if not exists:
+            logger.info(f"Criando coleção '{settings.qdrant_collection_name}'...")
+            client.create_collection(
+                collection_name=settings.qdrant_collection_name,
+                vectors_config=models.VectorParams(
+                    size=768, 
+                    distance=models.Distance.COSINE
+                ),
+            )
+            logger.info("Coleção criada com sucesso.")
+    except Exception as e:
+        logger.error(f"Erro ao verificar/criar coleção: {e}")
 
 
 def extract_text_from_pdf(file_path: str) -> List[Dict]:

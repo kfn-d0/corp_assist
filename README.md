@@ -230,9 +230,26 @@ AI_ENTERPRISE_RAG/
 
 ---
 
-## Segurança e Guardrails
+## Troubleshooting
 
-- **Baixa Alucinação**: O assistente responde "Não encontrei informações" se os documentos não contêm a resposta.
-- **Isolamento de Dados**: Nenhuma informação é enviada para APIs externas (OpenAI, Anthropic, etc).
+### 1. Status: Offline
+Se a Base Vetorial aparecer como "Offline":
+- Certifique-se de que o Docker está rodando.
+- Verifique se os nomes dos containers não conflitam com instâncias antigas (`docker ps`).
+- Tente rodar `docker-compose -f docker/docker-compose.yml restart qdrant`.
+
+### 2. ModuleNotFoundError
+Se encontrar erros de módulos faltando ao rodar o Backend ou Frontend:
+- Certifique-se de que o Ambiente Virtual (`venv`) está ativado.
+- Rode `pip install -r requirements.txt` novamente. Note que o arquivo atualizado agora contém todas as dependências necessárias (FastAPI, PyMuPDF, etc).
+
+### 3. Erro de Conexão (WinError 10061)
+Isso ocorre quando o Frontend tenta falar com o Backend, mas a API não foi iniciada.
+- **Solução**: Siga a ordem: 
+  1. Docker 
+  2. Ollama 
+  3. Backend (API na porta 8000)
+  4. Frontend (Streamlit)
 
 ---
+
