@@ -9,9 +9,12 @@ import os
 import traceback
 from datetime import datetime, timezone
 from typing import List
+import logging
 
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
+
+logger = logging.getLogger(__name__)
 
 from backend.config import settings
 from backend.models import (

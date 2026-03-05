@@ -8,8 +8,11 @@ import os
 import hashlib
 import json
 import uuid
+import logging
 from datetime import datetime, timezone
 from typing import Optional, List, Dict
+
+logger = logging.getLogger(__name__)
 
 import fitz
 from docx import Document as DocxDocument
